@@ -20,7 +20,7 @@
 import os
 import subprocess
 from subprocess import check_output
-#import ert.ecl as ecl
+import ert.ecl as ecl
 import ecl
 
 def GetRGB(poro):
@@ -63,12 +63,12 @@ def create_SWFN_LET_Skj(Lw,Ew,Tw, Swcr,Sorw,Krwmax,Cw,Co,Aw,Ao):
               Sw = Swcr
               Krw = 0
               firsttime = False
-	      SwPcw=Sw/ (1-Sw-Sorw)
+              SwPcw=Sw/ (1-Sw-Sorw)
               Pc =str(Cw/SwPcw**Aw)
         elif (Sw >= Swmax):
               string +=" \t"+str(('%.2f' % Sw))+"\t"+str(Krw)+"\t"+str(Pc)+"\n"
               break
-    	else:
+        else:
          Swn=(Sw-Swcr) / (1-Sorw-Swcr)
          SwPco=(1-Sw-Sorw) / (1-Sorw)
          SwPcw=Sw/ (1-Sw-Sorw)
@@ -103,7 +103,7 @@ def create_SWFN_Corey_Skj(Swcr,Sorw,Krwmax,Nw,Cw,Co,Aw,Ao):
               firsttime = False
               SwPcw=(Sw-Swir) / (1-Swir)
               Pc = 1
-    	else:
+        else:
          Swn=(Sw-Swcr) / (1-Sorw-Swcr)
          SwPco=(1-Sw-Sorw) / (1-Sorw)
          SwPcw=(Sw-Swir) / (1-Swir)
@@ -136,7 +136,7 @@ def create_SGFN_LET(Lg,Eg,Tg, Sgcr,Swcr,Sorg,Krgmax):
               Krg = 0
               firsttime = False
               Pc = 0
-    	else:
+        else:
          Sgn=Sg / (1-Sorg-Swcr)
          Krg = Krgmax * Sgn**Lg / (Sgn**Lg+Eg*(1-Sgn)**Tg)
          Pc = "0"
@@ -168,11 +168,11 @@ def create_SOF2_LET(Low,Eow,Tow,Swcr,Sorw):
             Krow = 0
             firsttime = False
         else:
-    		if ((So - Sorw) < 0.0):
-    			Krow=0
-    		else: 
-                 Son=(So-Sorw) / (1-Sorw-Swcr)
-                 Krow = Son**Low / (Son**Low+Eow*(1-Son)**Tow)
+          if ((So - Sorw) < 0.0):
+            Krow=0
+          else: 
+            Son=(So-Sorw) / (1-Sorw-Swcr)
+            Krow = Son**Low / (Son**Low+Eow*(1-Son)**Tow)
 
     
     
@@ -203,11 +203,11 @@ def create_SOF2_Corey(No,Swcr,Sorw):
             Krow = 0
             firsttime = False
         else:
-    		if ((So - Sorw) < 0.0):
-    			Krow=0
-    		else: 
-                 Son=(So-Sorw) / (1-Sorw-Swcr)
-                 Krow = Son**No
+          if ((So - Sorw) < 0.0):
+            Krow=0
+          else: 
+                  Son=(So-Sorw) / (1-Sorw-Swcr)
+                  Krow = Son**No
 
     
     
@@ -266,7 +266,7 @@ def WriteDATAfile(height,ExpParams,Orientation,Padding_top,Padding_bottom,Crop_p
         stringlist+="DZ\n"+str(Cellnb)+"*"+str(size_z)+"/\n"
         stringlist+="TOPS\n"
         for i in range(nblocks_z,0,-1):
-        	stringlist+=str(nblocks**2)+"*"+str(i*size_z)+"\n"
+          	stringlist+=str(nblocks**2)+"*"+str(i*size_z)+"\n"
         stringlist+="/\n"
         stringlist+="INCLUDE\n'PORO.INC' /\nINCLUDE\n'PERMX.INC' /\nINCLUDE\n'ACTNUM.INC' /\nCOPY\nPERMX PERMY /\nPERMX PERMZ /\n/\n"
         stringlist+="EDIT\n"
